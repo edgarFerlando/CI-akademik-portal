@@ -1,0 +1,19 @@
+version: '2'
+services:
+  myapp:
+    image: 'bitnami/codeigniter:latest'
+    labels:
+      kompose.service.type: nodeport
+    ports:
+      - '8000:8000'
+    volumes:
+      - '.:/app'
+    depends_on:
+      - mariadb
+  mariadb:
+    image: 'mysql-latihan'
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=latihan
